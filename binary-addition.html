@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Binary Addition</title>
+</head>
+<body>
+<script>
+function addBinary( a, b ){
+  var sum = a + b,
+  		binary = '';
+
+  while ( sum > 0 ) {
+    binary = ( sum % 2 ) + binary;
+    sum = Math.floor( sum / 2 );
+  }
+
+  return binary;
+}
+
+console.log( addBinary( 1,2 ) ); //Should be 11
+console.log( addBinary( 51,12 ) ); //Should be 111111
+console.log( addBinary( 100, 0 ) ); //Should be 1100100
+</script>
+
+<h1>Binary Addition</h1>
+<h2>Description:</h2>
+
+<p>Implement a function that successfully adds two numbers together and returns their solution in binary. The conversion can be done before, or after the addition of the two.</p>
+
+<p>The binary number returned should be a string!</p>
+
+<p><small>Source: http://www.codewars.com/</small></p>
+
+</body>
+</html>
