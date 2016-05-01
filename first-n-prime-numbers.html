@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>First n Prime Numbers</title>
+</head>
+<body>
+<script>
+function Primes(){
+  this.cache = [];
+
+  this.first = function( num ) {
+    if ( this.cache.length >= num ) {
+      return this.cache.slice( 0, num );
+    }
+
+    var checking = ( this.cache.length ? this.cache[ this.cache.length - 1 ] + 1 : 2 );
+
+    while ( this.cache.length < num ) {
+      var isPrime = this.checkPrime( checking );
+      if ( isPrime ) {
+        this.cache.push( isPrime );
+      }
+      checking += 1;
+    }
+
+    return this.cache.slice( 0, num );
+  };
+
+  this.checkPrime = function( num ) {
+    for ( var i = 2; i < num; i++ ) {
+      if ( 0 === num % i ) {
+        return false;
+      }
+    }
+    return num;
+  };
+}
+
+Primes = new Primes();
+
+console.log( Primes.first(1) ); // [2])
+console.log( Primes.first(2) ); // [2, 3]
+console.log( Primes.first(5) ); // [2, 3, 5, 7, 11]
+console.log( Primes.first(20).slice(15,20) ); // [53, 59, 61, 67, 71]
+console.log( Primes.first(12000).slice(11994,11997) ); // [128119,128147,128153]
+</script>
+
+<h1>First n Prime Numbers</h1>
+<h2>Description:</h2>
+
+<p>A prime number is an integer greater than 1 that is only evenly divisible by itself and 1.</p>
+
+<p>Write your own Primes class with class method Primes.first(n) that returns an array of the first n prime numbers.</p>
+
+<pre>
+Primes.first(1)
+# => [2]
+
+Primes.first(2)
+# => [2, 3]
+
+Primes.first(5)
+# => [2, 3, 5, 7, 11]
+</pre>
+
+<p><small>Source: http://www.codewars.com/</small></p>
+
+</body>
+</html>
