@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Multiples of 3 and 5</title>
+</head>
+<body>
+<script>
+function solution(number){
+	// I used an array here, but it would be more efficient
+	// to simply have an integer, sum, that has the needed values
+	// added to it.
+  var found = [];
+  for ( var i = 3; i < number; i++ ) {
+    if ( 0 === i % 3 || 0 === i % 5 ) {
+      found.push( i );
+    }
+  }
+  return found.reduce(function(a,b){return a + b;});
+}
+
+console.log( solution( 10 ) ); // 23
+console.log( solution( 20 ) ); // 78
+console.log( solution( 200 ) ); // 9168
+</script>
+
+<h1>Multiples of 3 and 5</h1>
+<h2>Description:</h2>
+
+<p>If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.</p>
+
+<p>Finish the solution so that it returns the sum of all the multiples of 3 or 5 below the number passed in.</p>
+<p><i>Courtesy of ProjectEuler.net</i></p>
+
+<p><small>Source: http://www.codewars.com/</small></p>
+
+</body>
+</html>
