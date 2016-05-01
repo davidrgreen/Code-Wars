@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Snail Sort</title>
+</head>
+<body>
+<script>
+function snail( array ) {
+  var sorted = [],
+      maxWidth = array[0].length - 1,
+      maxHeight = array.length - 1,
+      minHeight = 0,
+      minWidth = 0,
+      total = ( maxWidth + 1 ) * ( maxHeight + 1 ),
+      progress = 0,
+      posx = 0,
+      posy = 0,
+      dir = 'r';
+
+  while ( progress < total ) {
+    sorted.push( array[ posy ][ posx ] );
+
+    if ( 'r' === dir ) {
+      if ( posx < maxWidth ) {
+        posx += 1;
+      } else {
+        posy += 1;
+        dir = 'd';
+        maxWidth -= 1;
+      }
+    } else if ( 'd' === dir ) {
+      if ( posy < maxHeight ) {
+        posy += 1;
+      } else {
+        posx -= 1;
+        dir = 'l'
+        minHeight += 1;
+      }
+    } else if ( 'l' === dir ) {
+      if ( posx > minWidth ) {
+        posx -= 1;
+      } else {
+        posy -= 1;
+        dir = 'u';
+        minWidth += 1;
+      }
+    } else if ( 'u' === dir ) {
+      if ( posy > minHeight ) {
+        posy -= 1;
+      } else {
+        posx += 1;
+        dir = 'r';
+        maxHeight -= 1;
+      }
+    }
+
+    progress += 1;
+  }
+  return sorted;
+}
+
+var test1 = [[1,2,3],
+             [8,9,4],
+             [7,6,5]];
+var test2 = [[1,2,3,4,5,6],
+             [14,15,16,17,18,7],
+             [13,12,11,10,9,8]]
+console.log( snail( test1 ) );
+console.log( snail( test2 ) );
+</script>
+
+<h1>Snail Sort</h1>
+<h2>Description:</h2>
+
+<p>Given an n x n array, return the array elements arranged from outermost elements to the middle element, traveling clockwise.</p>
+
+<pre>
+array = [[1,2,3],
+         [4,5,6],
+         [7,8,9]]
+snail(array) #=> [1,2,3,6,9,8,7,4,5]
+</pre>
+
+<p>For better understanding, please follow the numbers of the next array consecutively:</p>
+
+<pre>
+array = [[1,2,3],
+         [8,9,4],
+         [7,6,5]]
+snail(array) #=> [1,2,3,4,5,6,7,8,9]
+</pre>
+
+<p>NOTE: The idea is not sort the elements from the lowest value to the highest; the idea is to traverse the 2-d array in a clockwise snailshell pattern.</p>
+
+<p>NOTE 2: The 0x0 (empty matrix) is represented as [[]]</p>
+
+<p><small>Source: http://www.codewars.com/</small></p>
+
+</body>
+</html>
