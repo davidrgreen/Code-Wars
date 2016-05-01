@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vector Class</title>
+</head>
+<body>
+<script>
+var Vector = function (components) {
+  this.components = components;
+
+  this.add = function( b ) {
+    if ( this.components.length !== b.components.length ) {
+      throw Error( 'Vectors are not same length.' );
+    }
+
+    var sums = [];
+
+    for( var i = 0, length = this.components.length; i < length; i++ ) {
+      sums.push( this.components[i] + b.components[i] );
+    }
+
+    return new Vector( sums );
+  };
+
+  this.subtract = function( b ) {
+    if ( this.components.length !== b.components.length ) {
+      throw Error( 'Vectors are not same length.' );
+    }
+
+    var differences = [];
+
+    for( var i = 0, length = this.components.length; i < length; i++ ) {
+      differences.push( this.components[i] - b.components[i] );
+    }
+
+    return new Vector( differences );
+  };
+
+  this.dot = function( b ) {
+    if ( this.components.length !== b.components.length ) {
+      throw Error( 'Vectors must be the same length.' );
+    }
+
+    var products = [];
+
+    for( var i = 0, length = this.components.length; i < length; i++ ) {
+      products.push( this.components[i] * b.components[i] );
+    }
+
+    return products.reduce(function(a,b){return a + b;});
+  };
+
+  this.norm = function() {
+    return Math.sqrt( this.components.reduce( function(a,b){
+      return a + Math.pow( b, 2 );
+    }));
+  };
+
+  this.equals = function( b ) {
+    if ( this.components.length !== b.components.length ) {
+      return false;
+    }
+
+    for ( var i = 0, length = this.components.length; i < length; i++ ) {
+      if ( this.components[ i ] !== b.components[ i ] ) {
+        return false;
+      }
+    }
+
+    return true;
+  };
+
+  this.toString = function(){
+    return '(' + this.components.join(',') + ')';
+  };
+};
+
+var a = new Vector([1,2,3]);
+var b = new Vector([3,4,5]);
+var c = new Vector([5,6,7,8]);
+var d = new Vector([1,2,3]);
+console.log( a.add(b) ); // should return Vector([4,6,8])
+console.log( a.subtract(b) ); // should return Vector([-2,-2,-2])
+console.log( a.dot(b) ); // should return 1*3+2*4+3*5 = 26
+console.log( a.norm() ); // should return sqrt(1^2+2^2+3^2)=sqrt(14)=3.74165
+// console.log( a.add(c) ); // throws an error
+console.log( a.toString() ); // (1,2,3)
+console.log( a.equals( b ) ); // false
+console.log( a.equals( d ) ); // true
+</script>
+
+<h1>Vector Class</h1>
+<h2>Description:</h2>
+
+<p>Create a Vector object that supports addition, subtraction, dot products, and norms. So, for example:</p>
+
+<pre>
+var a = new Vector([1,2,3]);
+var b = new Vector([3,4,5]);
+var c = new Vector([5,6,7,8]);
+a.add(b); // should return Vector([4,6,8])
+a.subtract(b); // should return Vector([-2,-2,-2])
+a.dot(b); // should return 1*3+2*4+3*5 = 26
+a.norm(); // should return sqrt(1^2+2^2+3^2)=sqrt(14)
+a.add(c); // throws an error
+</pre>
+
+<p>If you try to add, subtract, or dot two vectors with different lengths, you must throw an error!</p>
+
+<p>Also provide:</p>
+
+<ul>
+<li>a toString function, so that using the vectors from above, a.toString() === '(1,2,3)'</li>
+<li>an equals function, so that two vectors who have the same components are equal</li>
+</ul>
+
+<p><small>Source: http://www.codewars.com/</small></p>
+
+</body>
+</html>
