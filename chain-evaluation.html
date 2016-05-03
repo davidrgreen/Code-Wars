@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Chain Evaluation</title>
+</head>
+<body>
+<script>
+Number.prototype.add = function( n ) {
+  return this + n;
+};
+
+Number.prototype.subtract = function( n ) {
+  return this - n;
+};
+
+Number.prototype.multiply = function( n ) {
+  return this * n;
+};
+
+Number.prototype.divide = function( n ) {
+  return this / n;
+};
+
+Number.prototype.square = function() {
+  return this * this;
+};
+
+console.log( (3).add(5).multiply(2).subtract(8).divide(2).square() ); // should be 16
+</script>
+
+<h1>Chain Evaluation</h1>
+<h2>Description:</h2>
+<p>Method chaining is a very interesting way to keep your program clean.</p>
+
+<p>As a part of this Kata, you need to create functions such that one could evaluate the following expression:</p>
+
+<pre>(3).add(5).multiply(2)</pre>
+
+<p>The above expression evaluates to be 16.</p>
+
+<p>You need to implement the following methods:</p>
+<ul>
+  <li>add</li>
+  <li>subtract</li>
+  <li>multiply</li>
+  <li>divide</li>
+  <li>square</li>
+</ul>
+<p>After you're done, one could chain these five methods to create chains of almost any length.</p>
+
+
+
+<p><small>Source: http://www.codewars.com/</small></p>
+
+</body>
+</html>
