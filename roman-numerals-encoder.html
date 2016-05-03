@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Roman Numerals Encoder</title>
+</head>
+<body>
+<script>
+function solution(number){
+  var roman = '',
+      numerals = [ 'M', 'D', 'C', 'L', 'X', 'V', 'I' ],
+      numeralValues = [ 1000, 500, 100, 50, 10, 5, 1 ],
+      howMany,
+      shortcut,
+      potentiallyShorten,
+      needed;
+
+  for ( var i = 0, length = numerals.length; i < length; i++ ) {
+    if ( 0 === number ) {
+      break;
+    }
+
+    // Potentially use a combination of numerals to avoid having
+    // more than three in a row.
+    potentiallyShorten = numeralValues[ i - 1 ] / number;
+    if ( potentiallyShorten >= 1 && potentiallyShorten < 2) {
+      shortcut = Math.floor( number / numeralValues[ i - 1 ] * 10 ) * Math.floor( numeralValues[ i - 1 ] / 10 );
+      if ( shortcut > 0 ) {
+        needed = numeralValues[ i - 1 ] - shortcut;
+        if ( numeralValues.indexOf( needed ) >= 0 ) {
+          roman += numerals[ numeralValues.indexOf( needed ) ] + numerals[ i - 1 ];
+          number -= shortcut;
+          continue;
+        }
+      }
+    }
+
+    howMany = Math.floor( number / numeralValues[ i ] );
+    number -= howMany * numeralValues[ i ];
+
+    if ( howMany > 3 && numerals[ i - 1 ] ) {
+      // Use the next-biggest numeral in a combination to avoid more than
+      // 3 of the same numeral in a row.
+      roman += numerals[ i ] + numerals[ i - 1 ];
+    } else {
+      // Not any higher numeral to use so use however many.
+      for ( var n = 0; n < howMany; n++ ) {
+        roman += numerals[ i ];
+      }
+    }
+  }
+
+  return roman;
+}
+
+console.log( solution(1990) );
+// 1990 should equal "MCMXC"
+console.log( solution(19) );
+// 19 should equal XIX
+console.log( solution(4) );
+// 4 should equal IV
+console.log( solution(2724) );
+// 2724 should equal MMDCCXXIV
+</script>
+
+<h1>Roman Numerals Encoder</h1>
+<h2>Description:</h2>
+<p>Create a function taking a positive integer as its parameter and returning a string containing the Roman Numeral representation of that integer.</p>
+
+<p>Modern Roman numerals are written by expressing each digit separately starting with the left most digit and skipping any digit with a value of zero. In Roman numerals 1990 is rendered: 1000=M, 900=CM, 90=XC; resulting in MCMXC. 2008 is written as 2000=MM, 8=VIII; or MMVIII. 1666 uses each Roman symbol in descending order: MDCLXVI.</p>
+
+<p>Example:</p>
+
+<pre>solution(1000); // should return 'M'</pre>
+
+<p>Help:</p>
+<pre>
+Symbol    Value
+I          1
+V          5
+X          10
+L          50
+C          100
+D          500
+M          1,000
+</pre>
+<p>Remember that there can't be more than 3 identical symbols in a row.</p>
+
+
+<p><small>Source: http://www.codewars.com/</small></p>
+
+</body>
+</html>
