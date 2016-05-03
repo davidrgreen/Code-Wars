@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Your order, please</title>
+</head>
+<body>
+<script>
+function order(words){
+  var sorted = [],
+      split = words.split(' ');
+
+  for ( var i = 0, length = split.length; i < length; i++ ) {
+    for ( var s = 0, slength = split[ i ].length; s < slength; s++ ) {
+      if ( ! isNaN( split[ i ].charAt( s ) ) ) {
+        sorted[ parseInt( split[ i ].charAt( s ), 10 ) - 1 ] = split[ i ];
+      }
+    }
+  }
+
+  return sorted.join(' ');
+}
+
+
+console.log( 'Empty string: ' + order( '' ) );
+console.log( order( 'is2 Thi1s T4est 3a' ) );
+console.log( order( '4of Fo1r pe6ople g3ood th5e the2' ) );
+</script>
+
+<h1>Your order, please</h1>
+<h2>Description:</h2>
+<p>Your task is to sort a given string. Each word in the String will contain a single number. This number is the position the word should have in the result.</p>
+
+<p>Note: Numbers can be from 1 to 9. So 1 will be the first word (not 0).</p>
+
+<p>If the input String is empty, return an empty String. The words in the input String will only contain valid consecutive numbers.</p>
+
+<p>For an input: "is2 Thi1s T4est 3a" the function should return "Thi1s is2 3a T4est"</p>
+
+<p><small>Source: http://www.codewars.com/</small></p>
+
+</body>
+</html>
