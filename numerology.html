@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Numerology</title>
+</head>
+<body>
+<script>
+function solution( date ){
+  var dateString = date.getDate().toString() + (date.getMonth() + 1).toString() +
+        date.getFullYear().toString(),
+      dateTotal = sumString( dateString );
+
+  return sumString( dateTotal );
+}
+
+/**
+ * Treat the letters in a string as numbers and add them all together.
+ *
+ * @param  array str A string. If not a string it will be converted to one.
+ *
+ * @return integer The sum of the digits within the array.
+ */
+function sumString( str ) {
+  return parseInt( str.toString().split('').reduce(function( a, b ){
+    return parseInt( a, 10 ) + parseInt( b, 10 );
+  }), 10 );
+}
+
+console.log( solution( new Date('06/14/2010') ) ); // should be 5
+console.log( solution( new Date('10/13/1964') ) ); // should be 7
+console.log( solution( new Date('02/04/2010') ) ); // should be 9
+</script>
+
+<h1>Numerology</h1>
+<h2>Description:</h2>
+<p>In numerology, every number has a certain meaning that expresses someones connection to the universe! This single digit integer can be calculated by adding up every digit in the birthdate: year, month, and date. Each time the sum exceeds 10, add up the 2 digits.</p>
+<p>For example, new Date('06/14/2010') = 5</p>
+<p>So, what is your number?</p>
+
+<p><small>Source: http://www.codewars.com/</small></p>
+
+</body>
+</html>
