@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Deep Comparison of Objects</title>
+</head>
+<body>
+<script>
+function deepCompare( o1, o2 ) {
+  var key,
+      props1 = 0,
+      props2 = 0;
+
+  if ( ! o1 || ! o2 ) {
+    return o1 === o2;
+  }
+
+  for ( key in o2 ) {
+    if ( o2.hasOwnProperty( key ) ) {
+      props2 += 1;
+    }
+  }
+
+  for ( key in o1 ) {
+    if ( o1.hasOwnProperty( key ) ) {
+      props1 += 1;
+      if ( typeof o1[ key ] === 'object' && o1[ key ] !== null ) {
+        // objects
+        if ( ! o2[ key ] || ! deepCompare( o1[ key ], o2[ key ] ) ) {
+          return false;
+        }
+      } else {
+        if ( o1[key] !== o2[key] ) {
+          return false;
+        }
+      }
+    }
+  }
+
+  // Lastly compare the number of properties in both, to confirm o2 isn't holding
+  // properties not in o1.
+  return props1 === props2;
+};
+
+console.log( deepCompare( {name: 'Joe', 'x': 1}, {name: 'Joe', 'x': 1, 'y': 3} ) );
+console.log( deepCompare( {name: 'Joe', 'x': 1}, {name: 'Joe', 'x': 1} ) );
+</script>
+
+<h1>Deep Comparison of Objects</h1>
+<h2>Description:</h2>
+<p>Comparing objects is not an easy task in JavaScript. The comparison operator only returns true if both variables point to the same object, that's why two objects with the same properties and values are different for JavaScript, like this:</p>
+
+<pre>
+var a = { name: 'Joe' };
+var b = { name: 'Joe' };
+a == b;  //-> false
+</pre>
+
+<p>Sometimes it's really useful to detect when two objects have the same values.</p>
+
+<p>Your task is to develop the deepCompare function to test if two objects have the same properties and values. Remember that an object can contain other objects. The function should also be able to correctly compare simple values, like strings and numbers (without using type cohersion, please).</p>
+
+<p>To make things simpler, it will only have to deal with simple values and objects and arrays containing strings, booleans and numbers, without taking into account regular expressiones, dates and functions.</p>
+
+<p><small>Source: http://www.codewars.com/</small></p>
+
+</body>
+</html>
