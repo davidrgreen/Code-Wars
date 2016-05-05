@@ -51,11 +51,9 @@ function mix(s1, s2) {
       final.push( [ '=', grouped[ key ][0] ] );
     }
   }
-  console.log(final.join('/'));
   final.sort(function( a, b ){
     var aLen = a[1].length,
         bLen = b[1].length;
-    console.log( 'comparing ' + a[1] + ' to ' + b[1] );
 
     if ( aLen > bLen  ) {
       // Favor more letters and instances of one word having more
@@ -63,11 +61,7 @@ function mix(s1, s2) {
       return -1;
     } else if ( aLen < bLen ) {
       return 1;
-    } /*else if ( '=' === a[0] && '=' !== b[0] ){
-      return 1;
-    } else if ( '=' === b[0] && '=' !== a[0] ){
-      return -1;
-    }*/ else if ( aLen === bLen ) {
+    } else if ( aLen === bLen ) {
       if ( '=' !== a[0] && '=' === b[0] ) {
         return -1;
       } else if ( '=' !== b[0] && '=' === a[0] ) {
@@ -77,29 +71,13 @@ function mix(s1, s2) {
       } else if ( b[0] < a[0] ) {
         return 1;
       }
-      console.log( a[1] + '(' + a[1].charCodeAt(0) + ') is equal to ' + b[1] + '(' + b[1].charCodeAt(0) + ')' );
       if ( a[1].charCodeAt(0) < b[1].charCodeAt(0) ) {
-        console.log( 'Returning -1' );
         return -1;
       } else if ( a[1].charCodeAt(0) > b[1].charCodeAt(0) ) {
-        console.log( 'Returning 1' );
         return 1;
       } else {
-        console.log( 'equal' );
         return 0;
       }
-      /*if ( a[0] < b[0] ) {
-        return 1;
-      } else if ( b[0] < a[0] ) {
-        return -1;
-      }*/
-      // sort alphabetically
-      /*if ( valid.indexOf( a[1].slice(-1) )  < valid.indexOf( b[1].slice(-1) )
-          && valid.indexOf( a[1].slice(-1) ) > -1 ) {
-        return -1;
-      } else {
-        return 1;
-      }*/
     }
   });
 
