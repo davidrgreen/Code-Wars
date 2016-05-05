@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Array.isArray</title>
+</head>
+<body>
+<script>
+  function isArray(arr) {
+    return 'object' === typeof arr && '[object Array]' === Object.prototype.toString.call( arr );
+  }
+  console.log( isArray(1) );
+</script>
+
+<h1>Array.isArray</h1>
+<h2>Description:</h2>
+<p>JavaScript 1.8.5 helpfully added the Array.isArray function, which can tell you whether its argument is an Array or not. Without it, checking whether something is an Array is rather tricky. How would you do it if you had to?</p>
+<p><small>Source: http://www.codewars.com/</small></p>
+
+</body>
+</html>
