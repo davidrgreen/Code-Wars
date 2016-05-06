@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Strip Comments</title>
+</head>
+<body>
+<script>
+function solution( input, markers ){
+  input = input.split( /\n/ );
+  var i,
+      ilength = input.length,
+      n,
+      nlength = markers.length,
+      found;
+
+  for ( i = 0; i < ilength; i++ ) {
+    for ( n = 0; n < nlength; n++ ) {
+      found = input[ i ].indexOf( markers[ n ] );
+      if ( found >= 0 ) {
+        input[ i ] = input[ i ].substr( 0, found );
+      }
+    }
+
+    // Trim any whitespace at the end.
+    input[i] = input[ i ].replace( /\s+$/, '' );
+  }
+
+  return input.join( '\n' );
+}
+
+console.log( solution("apples, pears # and bananas\ngrapes\nbananas !apples", ["#", "!"]) );
+</script>
+
+<h1>Strip Comments</h1>
+<h2>Description:</h2>
+<p>Complete the solution so that it strips all text that follows any of a set of comment markers passed in. Any whitespace at the end of the line should also be stripped out.</p>
+
+<p>Example:</p>
+
+<p>Given an input string of:</p>
+
+<pre>
+apples, pears # and bananas
+grapes
+bananas !apples
+</pre>
+
+<p>The output expected would be:</p>
+
+<pre>
+apples, pears
+grapes
+bananas
+</pre>
+
+<p>The code would be called like so:</p>
+
+<pre>
+var result = solution("apples, pears # and bananas\ngrapes\nbananas !apples", ["#", "!"])
+// result should == "apples, pears\ngrapes\nbananas"
+</pre>
+
+<p><small>Source: http://www.codewars.com/</small></p>
+
+</body>
+</html>
