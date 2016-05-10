@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Count Word Occurrences</title>
+</head>
+<body>
+<script>
+var wordCounter = function(text) {
+  if ( this instanceof wordCounter ) {
+    this.words = [];
+
+    if ( /[^\.\s\,]/.test( text ) ) {
+
+      text = text.split(/\s|\.|\,/g);
+
+      for ( var i = 0, length = text.length; i < length; i++ ) {
+        if ( 'string' !== typeof text[ i ] ) {
+        continue;
+        } else if ( ! this.words[ text[ i ] ] ) {
+          this.words[ text[ i ] ] = 1;
+        } else {
+          this.words[ text[ i ] ] += 1;
+        }
+      }
+    }
+
+    this.count = function( word ) {
+
+      if ( ! this.words[ word ] ) {
+        return 0;
+      } else {
+        if ( 'function' === typeof this.words[ word ] ) {
+          return 0;
+        } else if ( 'string' === typeof this.words[ word ] ) {
+          // Data type returned a string due to prototype.toString()
+          return 1;
+        } else {
+          // A valid word count was found.
+          return this.words[ word ];
+        }
+      }
+    };
+
+  } else {
+    // The unit tests do not use the new keyword, so the constructor
+    // must call itself using new if `this` is not an instance of wordCounter.
+    return new wordCounter( text );
+  }
+};
+
+var counter = wordCounter("Lorem ipsum");
+console.log( counter.count("Lorem") );
+</script>
+
+<h1>Count Word Occurences</h1>
+<h2>Description:</h2>
+<p>You need to write a method that counts the number of occurences of a word in a given text.</p>
+
+<p>The word counter is created as follows:</p>
+<pre>
+var sample  = "Lorem ipsum";
+var counter = wordCounter(text);
+</pre>
+<p>Then one can get the count for a given word like this:</p>
+<pre>
+console.log(counter.count("Lorem")); // 1
+console.log(counter.count("hey"));   // 0
+</pre>
+<p>The input texts are simple: they only contain ASCII characters, words are either separate by white spaces or punctuation (only , and .). If the input only contain punctuation or white spaces, it should return a count of 0 for all words.</p>
+
+<p>For performance reasons, your implementations should count the words once and not parse the text each time the count method is called.</p>
+
+<p><small>Source: http://www.codewars.com/</small></p>
+
+</body>
+</html>
