@@ -48,11 +48,9 @@ function undoRedo(object) {
         undoStack.push( [ 'set', todo[1], object[ todo[1] ] ] );
         object[ todo[1] ] = todo[2];
       } else if ( 'del' === todo[0] ) {
-        console.log('x');
         redoStack.pop();
         undoStack.push( [ 'del', todo[1], object[ todo[1] ] ] );
         delete object[ todo[1] ];
-        console.log( object.hasOwnProperty( todo[1] ) );
       }
     }
   };
@@ -64,6 +62,7 @@ var obj = {
 };
 
 var unRe = undoRedo( obj );
+console.log( unRe.get( 'x' ) );
 unRe.del('x');
 console.log( unRe.get( 'x' ) );
 unRe.undo();
