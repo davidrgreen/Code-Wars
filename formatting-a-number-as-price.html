@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Formatting a Number as Price</title>
+</head>
+<body>
+<script>
+var numberToPrice = function(number) {
+	if ( ! number || isNaN( number ) ) {
+		return 'NaN';
+	}
+
+	// Remove all decimal places beyond the first two without rounding
+	if ( /\.\d{3}/.test( number ) ) {
+		number = parseInt( number * 100 ) / 100;
+	}
+
+	// Need to make sure number is a string.
+	number = number.toString();
+
+	// Add in commas.
+	while( /\d+\d{3}/.test( number ) ) {
+		number = number.replace( /(\d+)(\d{3})/, '$1,$2' );
+	}
+
+	// If no decimal was used add .00.
+	if ( -1 === number.indexOf( '.' ) ) {
+		return number + '.00';
+	}
+
+	// Add zeroes to reach two decimal places.
+	while ( ! /\.\d{2,}$/.test( number ) ) {
+		number += '0';
+	}
+
+	return number;
+}
+console.log( numberToPrice(1500.129) );
+console.log( numberToPrice('apple') );
+console.log( numberToPrice(13253.5123) );
+console.log( numberToPrice(-5) );
+console.log( numberToPrice(1234567.89) );
+console.log( numberToPrice('') );
+
+</script>
+
+<h1>Formatting a Number as Price</h1>
+<h2>Description:</h2>
+<p>Your objective is to add formatting to a plain number to display it as price.</p>
+
+<p>The function should return a string like this:</p>
+
+<pre>
+var price = numberToPrice(13253.5123);
+console.log(price); // 13,253.51
+</pre>
+
+<p>Numbers should use the standard comma for every 3 numbers and dot to separate the cents, cents need to be truncated to 2 decimals, in the case that the decimal part of the number is 1 character long or none you should add 0's so that the result will always have 2 decimal characters, the function will also evaluate negative numbers.</p>
+
+<p>function should return a string 'NaN' if the input is not a valid number</p>
+
+
+<p><small>Source: http://www.codewars.com/</small></p>
+
+</body>
+</html>
